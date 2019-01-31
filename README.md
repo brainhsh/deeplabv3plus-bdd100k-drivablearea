@@ -4,8 +4,10 @@
 
 This repository is from https://github.com/jfzhang95/pytorch-deeplab-xception.
 For BDD100k/drivable_area semantic segmentation, I added 
-1. bdd100k drivable area dataloader.
+
+1. bdd100k drivable area dataloader, and training/val/test scripts.
 2. prediction visualization for both color (visual result) and id (greyscale png file for submission).
+3. replaced Batch Normalization with Group Noramlization.
 
 For more detail, please visit the repository above.
 
@@ -13,6 +15,7 @@ For more detail, please visit the repository above.
 ```Shell
 bash go_train.sh
 ```
+If you want to specify cropsize, please check the code 'dataloaders/datasets/bdd100k.py'. Default is non-cropping input.
 
 
 ### How to evaluate
@@ -40,7 +43,7 @@ bash go_submit.sh
 
 1. Hyperparameter & environment
 
- I used 720 or noncrop for input. Using Group Normalization, I could avoid hurts from reducing batchsize due to increasing cropsize. If you want to specify cropsize, please check the code 'dataloaders/datasets/bdd100k.py'. Default is non-cropping input.
+ I did not crop, but fed original image as input. Replaced every BN with Group Nomralization. Compared to BN, I could use more smaller batchsize, feeding higher resolution and non-cropped image.
  
  Learning rate: 0.01 / 16 * batchsize
  
@@ -50,10 +53,12 @@ bash go_submit.sh
  
  max epoch: 30
  
- Single 12GB GPU
+ Data augmentation: random gaussian blur for training, normalize with BDD100k mean and std (not that of ImageNet) for both training and validation.
+ 
+ **Single 12GB GPU**
 
 | Backbone  | train/eval os  |mIoU in val | mIoU in test |
 | :-------- | :------------: |:---------: | :-----------:|
-| ResNet101 | 16/16          | 82.55%     | 82.61%       |
+| ResNet101 | 16/16          | 83.66%     | 83.85%       |
 
 ![Results](prd/result.png)
