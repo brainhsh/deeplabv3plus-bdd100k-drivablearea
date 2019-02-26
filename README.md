@@ -59,6 +59,6 @@ bash go_submit.sh
 
 | Backbone  | train/eval os  |mIoU in val | mIoU in test |
 | :-------- | :------------: |:---------: | :-----------:|
-| ResNet101 | 16/16          | 83.66%     | 83.85%       |
+| ResNet101 | 16/16          | 85.28%     | 85.33%       |
 
 ![Results](prd/result.png)
