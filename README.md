@@ -55,10 +55,17 @@ bash go_submit.sh
  
  Data augmentation: random gaussian blur for training, normalize with BDD100k mean and std (not that of ImageNet) for both training and validation.
  
- **Single 12GB GPU**
+ <span style="color:red">**Single 12GB GPU**</span>
 
 | Backbone  | train/eval os  |mIoU in val | mIoU in test |
 | :-------- | :------------: |:---------: | :-----------:|
-| ResNet101 | 16/16          | 85.28%     | 85.33%       |
+| ResNet101 | 16/16          | 85.50%     | 85.33%       |
+
+| WAD2018  | Score          | Difference   |
+| :-------- | :------------: |:----------------: | 
+| 1st       | 86.18          | -0.85 |
+| 2nd       | 86.04          | -0.71 |
+| Mine      | 85.33          | +0.0  |
+| 3rd       | 84.01          | +1.32 |
 
 ![Results](prd/result.png)
